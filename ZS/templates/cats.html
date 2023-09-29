@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'catstyle/style.css' %}"
+    <title>Title</title>
+</head>
+<body>
+
+<p>{{cats.name}}</p>
+<p>{{cats.color}}</p>
+<p>{{cats.eyes}}</p>
+
+<img src="{{cats.picture.url}}">
+
+
+</body>
+</html>

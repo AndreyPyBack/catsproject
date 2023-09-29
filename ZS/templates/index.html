@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'catstyle/style.css' %}">
+    <title>Title</title>
+</head>
+<body>
+{% for el in my_objects %}
+<p>{{el.name}}</p>
+<p>{{el.text_cat}}</p>
+<a href="{% url 'mydetail' el.id %}">Подробнее</a>
+{% endfor %}
+ <div class="pagination">
+        <span class="step-links">
+            {% if my_objects.has_previous %}
+                <a href="?page=1">&laquo; первая</a>
+                <a href="?page={{ my_objects.previous_page_number }}">предыдущая</a>
+            {% endif %}
+
+            <span class="current-page">{{ my_objects.number }}</span>
+
+            {% if my_objects.has_next %}
+                <a href="?page={{ my_objects.next_page_number }}">следующая</a>
+                <a href="?page={{ my_objects.paginator.num_pages }}">последняя &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+{% if user.is_authenticated%}
+<p> Hi, {{user.username}}!</p>
+{% endif %}
+
+<a href = "{% url 'logout'%}">Выйти</a>
+</body>
+</html>
